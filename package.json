@@ -1,0 +1,46 @@
+{
+  "name": "chizi",
+  "version": "0.1.0",
+  "description": "尺子科技模型即服务API",
+  "main": "chizi.min.js",
+  "scripts": {
+    "grunt": "grunt --force"
+  },
+  "author": "Chizi Technology Co., Ltd.",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.18.8",
+    "del": "^2.2.2",
+    "grunt": "^1.0.1",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-csslint": "^2.0.0",
+    "grunt-contrib-cssmin": "^2.0.0",
+    "grunt-contrib-jshint": "^1.1.0",
+    "grunt-contrib-pug": "^1.0.0",
+    "grunt-contrib-uglify": "^2.1.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "gulp": "^3.9.1",
+    "gulp-assetpaths": "^0.3.0",
+    "gulp-cache": "^0.4.5",
+    "gulp-clean-css": "^3.0.2",
+    "gulp-html-beautify": "^1.0.1",
+    "gulp-html-replace": "^1.6.2",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-if": "^2.0.2",
+    "gulp-imagemin": "^3.1.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-pug": "^3.3.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.1",
+    "gulp-useref": "^3.1.2",
+    "jshint": "^2.9.4",
+    "run-sequence": "^1.2.2"
+  },
+  "dependencies": {
+    "gulp-less": "^3.3.0",
+    "jquery": "^3.1.1",
+    "normalize.css": "^5.0.0"
+  }
+}
