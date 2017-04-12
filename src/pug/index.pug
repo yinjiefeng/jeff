@@ -1,0 +1,60 @@
+//Created by jeff on 2017/4/6.
+doctype html
+html(lang="en")
+    head
+        include inc/meta.pug
+        title JeffreeStyle
+        include inc/style.pug
+    body
+        div.section1
+            ul.device
+                li
+                    div.item.pc
+                li
+                    div.item.mobile-1
+                li
+                    div.item.mobile-2
+                li
+                    div.item.mobile-3
+                li
+                    div.item.mobile-4
+            div.test-light
+                span 我们都是社会主义接班人
+                div.light
+            div.test-button
+                a.jeff-button 确定
+            div(auto-play="true").jeff-slider
+                div.jeff-slider-content
+                    div.jeff-slider-item
+                        span.jeff-slider-item-title Slider_1
+                        img(src="../images/slider_bg1.png").jeff-slider-item-pic
+                    div.jeff-slider-item
+                        span.jeff-slider-item-title Slider_2
+                        img(src="../images/slider_bg2.png").jeff-slider-item-pic
+                    div.jeff-slider-item
+                        span.jeff-slider-item-title Slider_3
+                        img(src="../images/slider_bg3.png").jeff-slider-item-pic
+                    div.jeff-slider-item
+                        span.jeff-slider-item-title Slider_4
+                        img(src="../images/slider_bg4.png").jeff-slider-item-pic
+                    div.jeff-slider-item
+                        span.jeff-slider-item-title Slider_5
+                        img(src="../images/slider_bg5.png").jeff-slider-item-pic
+                    div.jeff-slider-item
+                        span.jeff-slider-item-title Slider_6
+                        img(src="../images/slider_bg6.png").jeff-slider-item-pic
+                div.jeff-slider-prev
+                div.jeff-slider-next
+                div.jeff-slider-controls
+
+        div#section2.section2
+            img(class="lazy" src="images/empty.gif" data-src="bg1.jpg")
+            img(class="lazy" src="images/empty.gif" data-src="bg2.jpg")
+        div#section3.section3
+            img(class="lazy" src="images/empty.gif" data-src="bg3.jpg")
+            img(class="lazy" src="images/empty.gif" data-src="bg4.jpg")
+        script(src="js/jquery.min.js"  type="text/javascript")
+        script(src="js/velocity.min.js"  type="text/javascript")
+        script(src="js/index.js"  type="text/javascript")
+        script(src="js/jeff-button.js"  type="text/javascript")
+        script(src="js/jeff-slider.js"  type="text/javascript")

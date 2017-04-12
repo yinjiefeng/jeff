@@ -9,10 +9,10 @@ var runSequence = require('run-sequence');
 
 var isCompress = false;
 
-gulp.task('browser-sync-chizi-pc', function() {
+gulp.task('browser-sync', function() {
     browserSync.init({
         server: {
-            baseDir: "./dist/pc-chizi",
+            baseDir: "./dist/",
             index: "./index.html"
         },
         port: 666
@@ -20,19 +20,19 @@ gulp.task('browser-sync-chizi-pc', function() {
 });
 
 gulp.task('watch', function () {
-    gulp.watch(["docs/pc-chizi/**/*.js"]).on('change', function(){
+    gulp.watch(["src/js/**/*.js"]).on('change', function(){
         runSequence('min-js', browserSync.reload);
     });
-    gulp.watch(['docs/pc-chizi/**/*.css', 'docs/pc-chizi/**/*.less']).on('change', function(){
+    gulp.watch(['src/css/**/*.css', 'src/css/**/*.less']).on('change', function(){
         runSequence('min-css', browserSync.reload);
     });
-    gulp.watch(['pug-chizi/**/*.pug']).on('change', function(){
+    gulp.watch(['src/pug/**/*.pug']).on('change', function(){
         runSequence('pug', browserSync.reload);
     });
 });
 
 gulp.task('pug', function(){
-    return gulp.src('pug-chizi/*.pug')
+    return gulp.src('src/pug/*.pug')
         .pipe($.pug())
         .pipe($.htmlBeautify({
             indent_size: 4,
@@ -43,13 +43,16 @@ gulp.task('pug', function(){
             extra_liners: []
         }))
         .pipe($.htmlmin())
-        .pipe(gulp.dest('dist/pc-chizi'));
+        .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('min-js', function(){
-    return gulp.src('docs/pc-chizi/**/*.js')
+    return gulp.src('src/**/*.js')
+        .pipe($.babel({
+            presets:['es2015']
+        })) //conver es5 to es5
         .pipe($.if(isCompress, $.uglify()))
-        .pipe(gulp.dest('dist/pc-chizi'));
+        .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('lib-js', function(){
@@ -59,41 +62,40 @@ gulp.task('lib-js', function(){
         'lib/jQueryRotate.2.2.js'
     ])
     //.pipe($.if(isCompress, $.uglify()))
-    .pipe(gulp.dest('dist/pc-chizi/assets/js'));
+    .pipe(gulp.dest('dist/js'));
 });
 
 gulp.task('min-css', function(){
-    return gulp.src(['docs/pc-chizi/**/*.less', 'docs/pc-chizi/**/*.css'])
+    return gulp.src(['src/**/*.less', 'src/**/*.css'])
         .pipe($.less())
         .pipe($.if(isCompress, $.cleanCss({
                 compatibility: 'ie8',//保留ie8及以下兼容写法
             })))
-        .pipe(gulp.dest('dist/pc-chizi'));
+        .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('copy-other', function(){
-    return gulp.src(['docs/pc-chizi/**/*', '!docs/pc-chizi/**/*.js', '!docs/pc-chizi/**/*.css', '!docs/pc-chizi/**/*.less'])
-        .pipe(gulp.dest('dist/pc-chizi'));
+gulp.task('copy-image', function(){
+    return gulp.src(['src/images/*.*'])
+        .pipe($.rename(function (path) {
+            path.dirname += "/images";
+        }))
+        .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('clean-pc-chizi', function(){
-    return del([
-        'dist/pc-chizi/**/*.js',
-        'dist/pc-chizi/**/*.css',
-        'dist/pc-chizi/**/*.less',
-        'dist/pc-chizi/**/*.html']);
+gulp.task('clean', function(){
+    return del(['dist/*']);
 });
 
-gulp.task('dev:pug', ['clean-pc-chizi'], function (callback) {
+gulp.task('dev:pug', ['clean'], function (callback) {
 
     isCompress = false;
 
-    runSequence(['min-js', 'lib-js', 'min-css', 'copy-other', 'pug'], 'browser-sync-chizi-pc', 'watch', callback);
+    runSequence(['min-js', 'lib-js', 'min-css', 'copy-image', 'pug'], 'browser-sync', 'watch', callback);
 });
 
 gulp.task('prod:pug', ['clean-pc-chizi'], function (callback) {
 
     isCompress = true;
 
-    runSequence(['min-js', 'lib-js', 'min-css', 'copy-other', 'pug'], 'browser-sync-chizi-pc', 'watch', callback);
+    runSequence(['min-js', 'lib-js', 'min-css', 'copy-image', 'pug'], 'browser-sync', 'watch', callback);
 });

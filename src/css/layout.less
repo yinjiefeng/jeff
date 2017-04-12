@@ -1,0 +1,271 @@
+@content-width: 1150px;
+@header-height: 80px;
+@section-height: 960px;
+
+html,
+body {
+  background-color: #FFF;
+  color: #333;
+  font-size: 14px;
+  font-family: "Microsoft YaHei UI", Arial, Georgia, sans-serif;
+  min-width: @content-width;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+html {
+  font-size: 100%;
+  body {
+    font-size: 1em;
+  }
+}
+
+a:link,
+a:visited,
+a:hover {
+  text-decoration: none;
+  color: #333;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.hide {
+  display: none !important;
+}
+
+.strong {
+  font-weight: bold;
+}
+
+.show-image(@path, @width, @height) {
+  width: @width;
+  height: @height;
+  background: url("../images/@{path}") no-repeat center center;
+  background-size: cover;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/@{path}",sizingMethod=scale);
+}
+
+.show-background() {
+  /* Safari 5.1 - 6.0 */
+  background: -webkit-linear-gradient(left,rgba(255,255,255,0) 0,rgba(255,255,255,.3) 50%,rgba(255,255,255,0) 100%);
+  /* Opera 11.1 - 12.0 */
+  background: -o-linear-gradient(left,rgba(255,255,255,0) 0,rgba(255,255,255,.3) 50%,rgba(255,255,255,0) 100%);
+  /* Firefox 3.6 - 15 */
+  background: -moz-linear-gradient(left,rgba(255,255,255,0) 0,rgba(255,255,255,.3) 50%,rgba(255,255,255,0) 100%);
+  /* 标准的语法 */
+  background: linear-gradient(to right,rgba(255,255,255,0) 0,rgba(255,255,255,.3) 50%,rgba(255,255,255,0) 100%);
+  /* IE */
+  filter:progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#00ffffff', endColorstr='#3fffffff');
+}
+
+.pre(@style,@value){
+  -webkit-@{style}: @value;
+  -moz-@{style}: @value;
+  -ms-@{style}: @value;
+  -o-@{style}: @value;
+  @{style}: @value;
+}
+
+.opacity(@degree) {
+  @ieDegree: @degree*100;
+  filter: Alpha(opacity=@ieDegree); /* IE */
+  -moz-opacity:@degree;    /* FF 主要是为了兼容老版本的FF */
+  opacity:@degree;    /* FF */
+}
+
+.keyframes(@name, @content) {
+  /* common */
+  @keyframes @name {
+    @content();
+  }
+  /* Firefox */
+  @-moz-keyframes @name {
+    @content();
+  }
+  /* Safari 和 Chrome */
+  @-webkit-keyframes @name {
+    @content();
+  }
+  /* Opera */
+  @-o-keyframes @name {
+    @content();
+  }
+}
+
+.keyframes(light-move, {
+  from{left :-50%}
+  to{left: 150%}
+});
+
+.keyframes(text-move, {
+  from{
+    top: 50px;
+    left: 0;
+    .opacity(0.1);
+  }
+  to{
+    top:0px;
+    left: 0px;
+    .opacity(1);
+  }
+});
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  width: @content-width;
+  overflow: hidden;
+}
+
+.section1 {
+  width: 100%;
+  height: @section-height;
+  background-color: #2e2e2e;
+  color: white;
+  text-align: center;
+  .device {
+    overflow: hidden;
+    > li {
+      float: left;
+      .item {
+        width: 22px;
+        height: 16px;
+        cursor: pointer;
+      }
+      .item:hover {
+        background-position-y: -16px;
+      }
+      .pc {
+        background: url("../images/mon-spr.png") no-repeat 0 0;
+      }
+      .mobile-1 {
+        background: url("../images/mon-spr.png") no-repeat -22px 0;
+      }
+      .mobile-2 {
+        background: url("../images/mon-spr.png") no-repeat -44px 0;
+      }
+      .mobile-3 {
+        background: url("../images/mon-spr.png") no-repeat -66px 0;
+      }
+      .mobile-4 {
+        background: url("../images/mon-spr.png") no-repeat -88px 0;
+      }
+    }
+  }
+  .test-light {
+    margin: 0 auto;
+    width: 400px;
+    height: 300px;
+    text-align: center;
+    background-color: red;
+    font-size: 30px;
+    position: relative;
+    overflow: hidden;
+
+    > span {
+      display: inline-block;
+      position: absolute;
+      left:0;
+      .pre(animation, text-move .2s cubic-bezier(0.23, 1, 0.32, 1));
+    }
+
+    .light {
+      width: 20%;
+      height: 100%;
+      position: absolute;
+      top:0;
+      left: -50%;
+      .show-background();
+      .pre(transform, skewX(-30deg));
+      .pre(animation, light-move 2s infinite);
+    }
+  }
+}
+
+.section2 {
+  overflow: hidden;
+  width: 100%;
+  background-color: green;
+  color: white;
+  > img {
+    width: 765px;
+    height: 574px;
+  }
+}
+
+.section3 {
+  overflow: hidden;
+  width: 100%;
+  background-color: blue;
+  color: white;
+  > img {
+    width: 765px;
+    height: 574px;
+  }
+}
+
+.card-bg() {
+  /* Safari 5.1 - 6.0 */
+  background: -webkit-linear-gradient(top,#acf9dd, #73C8A9, #35b788);
+  /* Opera 11.1 - 12.0 */
+  background: -o-linear-gradient(top,#acf9dd, #73C8A9, #35b788);
+  /* Firefox 3.6 - 15 */
+  background: -moz-linear-gradient(top,#acf9dd, #73C8A9, #35b788);
+  /* 标准的语法 */
+  background: linear-gradient(to bottom,#acf9dd, #73C8A9, #35b788);
+  /* IE */
+  filter:progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#0073C8A9', endColorstr='#ff73C8A9');
+}
+
+.card {
+  height: 400px;
+  width: 200px;
+  position: relative;
+  border: 1px solid yellow;
+  .card-item {
+    .card-bg();
+    &:not(.open) {
+      height:20%;
+      .card-title {
+        height:100%;
+        cursor: pointer;
+      }
+      .card-content {
+        height: 0;
+        display: none;
+      }
+    }
+    &.open {
+      height: 100%;
+      .card-title {
+        height: 20%;
+      }
+      .card-content {
+        height: 80%;
+        display: block;
+      }
+    }
+  }
+}
+
+.keyframes(button-active, {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+    opacity: .2;
+  }
+});
+
+.test-button {
+  overflow: hidden;
+}
